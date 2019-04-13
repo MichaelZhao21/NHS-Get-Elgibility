@@ -1,11 +1,10 @@
 <script>
-    function setup() {
-      $(".input").keydown(function(event) {
-        if (event.key == "Enter") {
-          checkStatus();
-        }
-      });
-    }
+    $("#idInput").keydown(function(event) {
+      console.log(event);
+      if (event.key == "Enter") {
+        checkStatus();
+      }
+    });
 
     function checkStatus() {
       var id = parseInt(document.getElementById("input").value);
