@@ -67,8 +67,8 @@ function retrieveMessages() {
 
 function getMessageRow(row) {
   var rowOutput = [];
-  rowOutput.push(sheet.getRange(currRow, 1).getDisplayValue());
-  rowOutput.push(sheet.getRange(currRow, 2).getDisplayValue());
-  rowOutput.push(sheet.getRange(currRow, 3).getBackground());
+  rowOutput.push(sheet.getRange(row, 1).getDisplayValue());
+  rowOutput.push(sheet.getRange(row, 2).getDisplayValue());
+  rowOutput.push(sheet.getRange(row, 3).getBackground());
   return rowOutput;
 }
