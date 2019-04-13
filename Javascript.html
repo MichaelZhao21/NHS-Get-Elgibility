@@ -12,7 +12,7 @@
         google.script.run.withSuccessHandler(printStatus).getStatus(id);
       }
       else {
-        printStatus("error");
+        google.script.run.withSuccessHandler(printStatus).retrieveMessages();
       }
     }
 
