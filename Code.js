@@ -58,10 +58,10 @@ function retrieveMessages() {
   var output = {};
   output.displayMaps = [];
   sheet = getSheetNumber(MESSAGES_SHEET);
-  console.log(sheet);
   var rowCount = FIRST_MESSAGES_ROW;
   while (isAnotherRow(rowCount)) {
     output.displayMaps.push(getMessageRow(rowCount));
+    rowCount++;
   }
   return output;
 }
