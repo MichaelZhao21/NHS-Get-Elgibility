@@ -4,31 +4,35 @@
         checkStatus();
       }
     });
-    
+
     function checkStatus() {
       var id = parseInt(document.getElementById("input").value);
-      if (isNaN(id) || (id < 100000 || id > 999999)) {
-        printStatus("error");
-      }
-      else {
+      if (isIdNumberReal(id)) {
         document.getElementById("output").innerHTML = "checking..."
         google.script.run.withSuccessHandler(printStatus).getStatus(id);
       }
+      else {
+        printStatus("error");
+      }
     }
-    
+
+    function isIdNumberReal(id) {
+      if (!isNaN(id) && id > 100000 && id < 999999) return true;
+    }
+
     function printStatus(status) {
       var doc = document.getElementById("output");
       var background = document.getElementById("overlay");
-      if (status == "Y") {
+      if (status == "Yes") {
         doc.innerHTML = "You are good :)";
         background.style.backgroundColor = "rgba(0,230,0,0.4)";
       }
-      else if (status == "N") {
+      else if (status == "No") {
         doc.innerHTML = "Your eligibility is at RISK -- See Mrs.Diers immediately!";
         background.style.backgroundColor = "rgba(255,0,0,0.4)";
       }
       else if (status == "missing") {
-        doc.innerHTML = "You are not a candidate!";
+        doc.innerHTML = "There seems to be a problem -- See Mrs.Diers immediately!";
         background.style.backgroundColor = "rgba(255,128,0,0.4)";
       }
       else {
