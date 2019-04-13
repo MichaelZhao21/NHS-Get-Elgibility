@@ -7,7 +7,7 @@
 
     function checkStatus() {
       var id = parseInt($("#idInput").val());
-      if (isIdNumberReal(id)) {
+      if (isIdNumber(id)) {
         $("#output").html("checking...");
         google.script.run.withSuccessHandler(printStatus).getStatus(id);
       }
@@ -16,29 +16,16 @@
       }
     }
 
-    function isIdNumberReal(id) {
+    function isIdNumber(id) {
       if (!isNaN(id) && id > 100000 && id < 999999) return true;
     }
 
-    function printStatus(status) {
-      console.log(status);
-      var doc = document.getElementById("output");
-      var background = document.getElementById("overlay");
-      if (status == "Yes") {
-        doc.innerHTML = "You are good :)";
-        background.style.backgroundColor = "rgba(0,230,0,0.4)";
-      }
-      else if (status == "No") {
-        doc.innerHTML = "Your eligibility is at RISK -- See Mrs.Diers immediately!";
-        background.style.backgroundColor = "rgba(255,0,0,0.4)";
-      }
-      else if (status == "missing") {
-        doc.innerHTML = "There seems to be a problem -- See Mrs.Diers immediately!";
-        background.style.backgroundColor = "rgba(255,128,0,0.4)";
-      }
-      else {
-        doc.innerHTML = "Please type your 6 digit ID number";
-        background.style.backgroundColor = "rgba(255,128,0,0.4)";
+    function printStatus(statObj) {
+      for (var i = 0; i < statObj.displayMaps.length; i++) {
+        if (statObj.status == statObj.displayMaps[i][0]) {
+          $("#output").html(statObj.displayMaps[i][1]);
+          $("#overlay").css("background-color", statObj.displayMaps[i][2]);
+        }
       }
     }
 
