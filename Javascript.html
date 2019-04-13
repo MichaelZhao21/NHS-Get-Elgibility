@@ -1,15 +1,14 @@
 <script>
     $("#idInput").keydown(function(event) {
-      console.log(event);
       if (event.key == "Enter") {
         checkStatus();
       }
     });
 
     function checkStatus() {
-      var id = parseInt(document.getElementById("input").value);
+      var id = parseInt($("#idInput").val());
       if (isIdNumberReal(id)) {
-        document.getElementById("output").innerHTML = "checking..."
+        $("#output").html("checking...");
         google.script.run.withSuccessHandler(printStatus).getStatus(id);
       }
       else {
