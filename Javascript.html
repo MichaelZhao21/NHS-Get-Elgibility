@@ -12,7 +12,7 @@
         google.script.run.withSuccessHandler(printStatus).getStatus(id);
       }
       else {
-        google.script.run.withSuccessHandler(printStatus).retrieveMessages();
+        printStatus({status:"error"});
       }
     }
 
@@ -21,6 +21,12 @@
     }
 
     function printStatus(statObj) {
+      console.log(statObj);
+      if (statObj.status == "error") {
+        $("#output").html("Please type your 6 digit ID number");
+        $("#overlay").css("background-color", "#00000066");
+        return;
+      }
       for (var i = 0; i < statObj.displayMaps.length; i++) {
         if (statObj.status == statObj.displayMaps[i][0]) {
           $("#output").html(statObj.displayMaps[i][1]);
