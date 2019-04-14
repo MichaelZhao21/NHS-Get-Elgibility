@@ -53,7 +53,7 @@ function isAnotherRow(currRow) {
 function getStatusIfIdNumIsRow(idNum, currRow) {
   var currCell = sheet.getRange(currRow, ID_NUM_COL);
   if (idNum == parseInt(currCell.getDisplayValue()))
-    return sheet.getRange(currRow, STATUS_COL).getDisplayValue();
+    return sheet.getRange(currRow, STATUS_COL).getDisplayValue().toLowerCase();
   return null;
 }
 
@@ -72,7 +72,7 @@ function retrieveMessages() {
 
 function getMessageRow(row) {
   var rowOutput = [];
-  rowOutput.push(sheet.getRange(row, 1).getDisplayValue());
+  rowOutput.push(sheet.getRange(row, 1).getDisplayValue().toLowerCase());
   rowOutput.push(sheet.getRange(row, 2).getDisplayValue());
   rowOutput.push(sheet.getRange(row, 3).getBackground());
   return rowOutput;
