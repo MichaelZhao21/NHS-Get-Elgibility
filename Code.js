@@ -7,6 +7,7 @@ var ID_NUM_COL = 3; // The column with the id nums
 var STATUS_COL = 4; // The column with the statuses
 var FIRST_MESSAGES_ROW = 2; //The first row of the messages sheet
 var sheet;
+var sheetNum;
 
 function doGet() {
   file = HtmlService.createTemplateFromFile('Index').evaluate();
@@ -19,7 +20,8 @@ function include(filename) {
 
 function getStatus(idNum) {
   var output = retrieveMessages();
-  sheet = getSheetNumber(MASTER_SHEET);
+  sheetNum = MASTER_SHEET;
+  sheet = getSheetNumber();
   var currRow = FIRST_ROW;
   var isCell;
   while (isAnotherRow(currRow)) {
@@ -34,15 +36,14 @@ function getStatus(idNum) {
   return output;
 }
 
-function getSheetNumber(num) {
+function getSheetNumber() {
   var ss = SpreadsheetApp.getActive();
-  return ss.getSheets()[num];
+  return ss.getSheets()[sheetNum];
 }
 
 function isAnotherRow(currRow) {
   var testCell = sheet.getRange(currRow, TEST_COL);
-  console.log("" + sheet + currRow);
-  if (sheet == MASTER_SHEET && currRow == DIVIDER_ROW) {
+  if (sheetNum == MASTER_SHEET && currRow == DIVIDER_ROW) {
     return true;
   }
   return (testCell.getDisplayValue() != "");
@@ -58,7 +59,8 @@ function getStatusIfIdNumIsRow(idNum, currRow) {
 function retrieveMessages() {
   var output = {};
   output.displayMaps = [];
-  sheet = getSheetNumber(MESSAGES_SHEET);
+  sheetNum = MESSAGES_SHEET;
+  sheet = getSheetNumber();
   var rowCount = FIRST_MESSAGES_ROW;
   while (isAnotherRow(rowCount)) {
     output.displayMaps.push(getMessageRow(rowCount));
