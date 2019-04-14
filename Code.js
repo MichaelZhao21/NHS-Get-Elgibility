@@ -6,6 +6,7 @@ var TEST_COL = 1; // The column used to check if there is another name (1st col)
 var ID_NUM_COL = 3; // The column with the id nums
 var STATUS_COL = 4; // The column with the statuses
 var FIRST_MESSAGES_ROW = 2; //The first row of the messages sheet
+
 var sheet;
 var sheetNum;
 
