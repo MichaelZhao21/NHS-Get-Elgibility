@@ -41,6 +41,7 @@ function getSheetNumber(num) {
 
 function isAnotherRow(currRow) {
   var testCell = sheet.getRange(currRow, TEST_COL);
+  console.log("" + sheet + currRow);
   if (sheet == MASTER_SHEET && currRow == DIVIDER_ROW) {
     return true;
   }
